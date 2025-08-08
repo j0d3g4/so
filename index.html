@@ -261,6 +261,47 @@
       padding: 15px;
     }
   }
+  @media (max-width: 480px) {
+  #sobre {
+    width: 90vw;
+    height: auto;
+    padding: 20px 10px;
+  }
+  #sobre-texto {
+    font-size: 1.8em;
+    line-height: 1.3;
+    color: #3a005c;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+  }
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 12px #a055b8;
+  }
+
+  .poems {
+    background: rgba(123, 47, 247, 0.75);
+    font-size: 1.1em;
+    padding: 20px;
+    color: #f3e6ff;
+  }
+
+  #main-content {
+    padding: 15px 10px;
+    max-width: 100vw;
+  }
+
+  button {
+    padding: 12px 25px;
+    font-size: 1em;
+  }
+}
+
 </style>
 </head>
 <body>

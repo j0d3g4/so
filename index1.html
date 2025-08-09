@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sorpresa Cumpleaños - Sobre</title>
+<title>Feliz Cumpleaños Compañerita - Sobre</title>
 <style>
+  /* Reset y básicos */
   body, html {
     margin: 0; padding: 0; height: 100%;
     font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -17,6 +18,7 @@
     position: relative;
   }
 
+  /* Sobre */
   #sobre {
     position: relative;
     width: 320px;
@@ -37,6 +39,7 @@
     transform: scale(1.05);
   }
 
+  /* Cinta (listón) arriba */
   #liston {
     position: absolute;
     top: 15px;
@@ -47,6 +50,7 @@
     box-shadow: 0 2px 6px rgba(247,7,163,0.6);
   }
 
+  /* Decoración cuerda */
   #liston::before, #liston::after {
     content: "";
     position: absolute;
@@ -66,12 +70,20 @@
     box-shadow: 0 0 6px rgba(241,7,163,0.7);
   }
 
+  /* Texto dentro del sobre */
   #sobre-texto {
     font-weight: 700;
     font-size: 1.3em;
     color: #5a2a82;
     padding: 0 15px;
     text-align: center;
+  }
+
+  /* Animación abrir sobre */
+  .abrir {
+    opacity: 0;
+    transform: translateY(-80px) rotateX(60deg);
+    pointer-events: none;
   }
 
   /* Estrellas cayendo doradas con brillo */
@@ -82,7 +94,7 @@
     width: 100vw;
     height: 100vh;
     overflow: visible;
-    z-index: 5;
+    z-index: 1;
   }
   .star-fall {
     position: absolute;
@@ -107,14 +119,40 @@
     50% { opacity: 1; }
     100% { opacity: 0.5; }
   }
+
+  /* Ajustes para celular hasta 481px */
+  @media (max-width: 481px) {
+    #sobre {
+      width: 90vw;
+      height: auto;
+      padding: 20px 15px;
+    }
+    #sobre-texto {
+      font-size: 1.8em;
+      line-height: 1.3;
+      color: #3a005c;
+    }
+    .stars-falling {
+      width: 100vw;
+      height: 100vh;
+    }
+    .star-fall {
+      width: 6px;
+      height: 6px;
+      box-shadow: 0 0 8px 2px gold;
+    }
+  }
 </style>
 </head>
 <body>
+
+  <!-- Sobre -->
   <div id="sobre" role="button" tabindex="0" aria-label="Abrir la sorpresa de cumpleaños">
     <div id="liston"></div>
     <div id="sobre-texto">Haz click para abrir tu sorpresa</div>
   </div>
 
+  <!-- Estrellas cayendo -->
   <div class="stars-falling" aria-hidden="true">
     <div class="star-fall" style="left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
     <div class="star-fall" style="left: 25%; animation-duration: 5s; animation-delay: 1.2s;"></div>
@@ -124,20 +162,26 @@
     <div class="star-fall" style="left: 85%; animation-duration: 6.2s; animation-delay: 1.1s;"></div>
   </div>
 
-<script>
-  const sobre = document.getElementById('sobre');
+  <script>
+    const sobre = document.getElementById('sobre');
+    // En esta página solo el sobre, no se muestra contenido adicional aquí
 
-  function abrirSobre() {
-    window.location.href = 'index2.html';
-  }
-
-  sobre.addEventListener('click', abrirSobre);
-  sobre.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      abrirSobre();
+    // Puedes agregar la animación para abrir el sobre y redirigir a la otra página:
+    function abrirSobre() {
+      sobre.classList.add('abrir');
+      setTimeout(() => {
+        // Aquí rediriges a la segunda página
+        window.location.href = 'index2.html';
+      }, 600);
     }
-  });
-</script>
+
+    sobre.addEventListener('click', abrirSobre);
+    sobre.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        abrirSobre();
+      }
+    });
+  </script>
 </body>
 </html>

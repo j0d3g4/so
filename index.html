@@ -218,35 +218,52 @@
   }
 
   /* Ajustes para celular */
-  @media (max-width: 480px) {
+  @media (max-width: 481px) {
     #sobre {
       width: 90vw;
-      height: auto;
-      padding: 20px 15px;
+      height: auto !important;
+      padding: 25px 15px;
     }
     #sobre-texto {
-      font-size: 1.6em;
-      color: #44006b;
+      font-size: 1.8em;
+      line-height: 1.3;
+      color: #3a005c;
+      padding: 10px;
+      word-wrap: break-word;
     }
     #main-content {
       max-width: 95vw;
-      padding: 15px;
-      font-size: 1.1em;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 20px 15px;
+      font-size: 1.2em;
+      display: block !important;
+      box-sizing: border-box;
     }
     header h1 {
-      font-size: 1.6em;
+      font-size: 1.8em;
+      margin-bottom: 10px;
     }
     header p {
-      font-size: 1.2em;
+      font-size: 1.3em;
+    }
+    .gallery {
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
     }
     .gallery img {
       min-width: 100px;
       border-radius: 10px;
-      box-shadow: 0 0 10px #9c27b0;
+      box-shadow: 0 0 12px #a055b8;
+      width: 100%;
+      height: auto;
     }
     .poems {
+      background: rgba(123, 47, 247, 0.75);
       font-size: 1.1em;
-      background: rgba(123, 47, 247, 0.6);
+      padding: 20px;
+      color: #f3e6ff;
+      border-radius: 15px;
     }
     button {
       font-size: 1em;
@@ -261,47 +278,6 @@
       padding: 15px;
     }
   }
-  @media (max-width: 480px) {
-  #sobre {
-    width: 90vw;
-    height: auto;
-    padding: 20px 10px;
-  }
-  #sobre-texto {
-    font-size: 1.8em;
-    line-height: 1.3;
-    color: #3a005c;
-  }
-
-  .gallery {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 8px;
-  }
-  .gallery img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 0 12px #a055b8;
-  }
-
-  .poems {
-    background: rgba(123, 47, 247, 0.75);
-    font-size: 1.1em;
-    padding: 20px;
-    color: #f3e6ff;
-  }
-
-  #main-content {
-    padding: 15px 10px;
-    max-width: 100vw;
-  }
-
-  button {
-    padding: 12px 25px;
-    font-size: 1em;
-  }
-}
-
 </style>
 </head>
 <body>
@@ -410,15 +386,13 @@
   // Pedir código para mensaje secreto
   function pedirCodigo() {
     const codigo = prompt("Introduce la combinación secreta:");
-    if (codigo === "1715") {
+    if (codigo && codigo.trim().toLowerCase() === "baila") {
       mensajeSecreto.style.display = 'block';
+      secretBtn.style.display = 'none';
     } else {
-      alert("Código incorrecto, inténtalo de nuevo");
-      mensajeSecreto.style.display = 'none';
+      alert("Código incorrecto. Intenta de nuevo.");
     }
   }
-  
 </script>
-
 </body>
 </html>

@@ -3,21 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Feliz Cumpleaños Compañerita - Sorpresa</title>
+<title>Feliz Cumpleaños Compañerita</title>
 <style>
   body, html {
-    margin: 0; padding: 0; min-height: 100vh;
+    margin: 0; padding: 0;
     font-family: 'Segoe UI', Tahoma, sans-serif;
     background: linear-gradient(135deg, #4b0082, #8a2be2);
     color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   #main-content {
     max-width: 480px;
-    width: 100%;
+    margin: 30px auto;
     padding: 20px;
     background: linear-gradient(135deg, #4b0082, #8a2be2);
     border-radius: 20px;
@@ -115,48 +112,47 @@
     text-align: center;
     font-size: 0.8em;
     color: #ccc;
+    margin-top: 30px;
   }
 
-  /* Ajustes para celular hasta 481px */
-  @media (max-width: 481px) {
-    #main-content {
-      max-width: 95vw;
-      padding: 15px;
-      font-size: 1.1em;
-    }
-    header h1 {
-      font-size: 1.6em;
-    }
-    header p {
-      font-size: 1.2em;
-    }
-    .gallery img {
-      min-width: 100px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #9c27b0;
-    }
-    .poems {
-      font-size: 1.1em;
-      background: rgba(123, 47, 247, 0.6);
-    }
-    button {
-      font-size: 1em;
-      padding: 12px 25px;
-    }
-    #frases .frase {
-      font-size: 1em;
-      padding: 15px 12px;
-    }
-    #mensajeSecreto {
-      font-size: 1.1em;
-      padding: 15px;
-    }
+  /* Estrellas cayendo doradas con brillo */
+  .stars-falling {
+    pointer-events: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: visible;
+    z-index: 1;
+  }
+  .star-fall {
+    position: absolute;
+    top: -10px;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, gold 60%, transparent 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 10px 3px gold;
+    opacity: 0.8;
+    animation-name: fall, twinkle;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+    animation-direction: normal, alternate;
+  }
+  @keyframes fall {
+    0% { transform: translateY(0); opacity: 0.8; }
+    100% { transform: translateY(110vh); opacity: 0; }
+  }
+  @keyframes twinkle {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
   }
 </style>
 </head>
 <body>
 
-  <main id="main-content" role="main" aria-live="polite">
+  <div id="main-content" role="main" aria-live="polite">
     <header>
       <h1>🎉 ¡Feliz 17 cumpleaños, compañerita! 🎉</h1>
       <p>Que tu día esté lleno de aventuras y sonrisas</p>
@@ -181,48 +177,62 @@
     </div>
 
     <section id="frases" aria-label="Frases de cumpleaños">
-      <div class="frase">"Que cada sueño se haga realidad."</div>
-      <div class="frase">"Eres luz y alegría en nuestras vidas."</div>
-      <div class="frase">"Sigue brillando con fuerza y corazón."</div>
+      <div class="frase">¡Que tu día sea tan brillante como una estrella fugaz!</div>
+      <div class="frase">Sigue siendo esa compañerita llena de energía y buen humor.</div>
+      <div class="frase">17 años de magia y amistad verdadera.</div>
+      <div class="frase">¡Feliz cumpleaños! Que tu vida sea una gran aventura.</div>
     </section>
 
-    <section id="mensajeSecreto" aria-live="assertive"></section>
+    <button id="secretBtn" onclick="pedirCodigo()">🔒 Mensaje secreto</button>
+    <div id="mensajeSecreto">
+      🎶 Cuando me vas a enseñar a bailar, compañerita querida 💃
+    </div>
 
-  </main>
+    <audio id="musica" src="musica.mp3" preload="auto"></audio>
+
+    <footer>
+      &copy; 2025 Con cariño para una compañerita especial 💜
+    </footer>
+  </div>
+
+  <div class="stars-falling" aria-hidden="true">
+    <div class="star-fall" style="left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
+    <div class="star-fall" style="left: 25%; animation-duration: 5s; animation-delay: 1.2s;"></div>
+    <div class="star-fall" style="left: 40%; animation-duration: 7s; animation-delay: 0.7s;"></div>
+    <div class="star-fall" style="left: 60%; animation-duration: 6.5s; animation-delay: 1.5s;"></div>
+    <div class="star-fall" style="left: 75%; animation-duration: 5.5s; animation-delay: 0.4s;"></div>
+    <div class="star-fall" style="left: 85%; animation-duration: 6.2s; animation-delay: 1.1s;"></div>
+  </div>
 
 <script>
   const frases = document.getElementById('frases');
+  const musica = document.getElementById('musica');
   const mensajeSecreto = document.getElementById('mensajeSecreto');
-  let musicOn = false;
-  let audio;
+  let musicPlaying = false;
 
   function mostrarFrases() {
-    if (frases.style.display === 'block') {
-      frases.style.display = 'none';
-      mensajeSecreto.textContent = '';
-    } else {
-      frases.style.display = 'block';
-      mensajeSecreto.textContent = '¡Disfruta estas frases para ti!';
-    }
+    frases.style.display = frases.style.display === 'none' || frases.style.display === '' ? 'block' : 'none';
   }
 
   function toggleMusic() {
-    if (!audio) {
-      audio = new Audio('musica-cumpleanos.mp3');
-      audio.loop = true;
-    }
-    if (!musicOn) {
-      audio.play();
-      musicOn = true;
+    if (musicPlaying) {
+      musica.pause();
     } else {
-      audio.pause();
-      musicOn = false;
+      musica.play();
+    }
+    musicPlaying = !musicPlaying;
+  }
+
+  function pedirCodigo() {
+    const codigo = prompt("Introduce la combinación secreta:");
+    if (codigo === "1715") {
+      mensajeSecreto.style.display = 'block';
+    } else {
+      alert("Código incorrecto, inténtalo de nuevo");
+      mensajeSecreto.style.display = 'none';
     }
   }
 </script>
 
-
-
 </body>
 </html>
-

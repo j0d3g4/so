@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sorpresa Cumpleaños - Sobre</title>
+<style>
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #4b0082, #8a2be2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  #sobre {
+    position: relative;
+    width: 320px;
+    height: 210px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    z-index: 10;
+  }
+  #sobre:hover {
+    transform: scale(1.05);
+  }
+
+  #liston {
+    position: absolute;
+    top: 15px;
+    width: 160px;
+    height: 14px;
+    background: linear-gradient(90deg, #7b2ff7, #f107a3);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(247,7,163,0.6);
+  }
+
+  #liston::before, #liston::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 25px; height: 3px;
+    background: linear-gradient(90deg, #7b2ff7, #f107a3);
+    border-radius: 5px;
+  }
+  #liston::before {
+    left: -30px;
+    transform: translateY(-50%) rotate(25deg);
+    box-shadow: 0 0 6px rgba(123,47,247,0.7);
+  }
+  #liston::after {
+    right: -30px;
+    transform: translateY(-50%) rotate(-25deg);
+    box-shadow: 0 0 6px rgba(241,7,163,0.7);
+  }
+
+  #sobre-texto {
+    font-weight: 700;
+    font-size: 1.3em;
+    color: #5a2a82;
+    padding: 0 15px;
+    text-align: center;
+  }
+
+  /* Estrellas cayendo doradas con brillo */
+  .stars-falling {
+    pointer-events: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: visible;
+    z-index: 5;
+  }
+  .star-fall {
+    position: absolute;
+    top: -10px;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, gold 60%, transparent 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 10px 3px gold;
+    opacity: 0.8;
+    animation-name: fall, twinkle;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+    animation-direction: normal, alternate;
+  }
+  @keyframes fall {
+    0% { transform: translateY(0); opacity: 0.8; }
+    100% { transform: translateY(110vh); opacity: 0; }
+  }
+  @keyframes twinkle {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+  }
+</style>
+</head>
+<body>
+  <div id="sobre" role="button" tabindex="0" aria-label="Abrir la sorpresa de cumpleaños">
+    <div id="liston"></div>
+    <div id="sobre-texto">Haz click para abrir tu sorpresa</div>
+  </div>
+
+  <div class="stars-falling" aria-hidden="true">
+    <div class="star-fall" style="left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
+    <div class="star-fall" style="left: 25%; animation-duration: 5s; animation-delay: 1.2s;"></div>
+    <div class="star-fall" style="left: 40%; animation-duration: 7s; animation-delay: 0.7s;"></div>
+    <div class="star-fall" style="left: 60%; animation-duration: 6.5s; animation-delay: 1.5s;"></div>
+    <div class="star-fall" style="left: 75%; animation-duration: 5.5s; animation-delay: 0.4s;"></div>
+    <div class="star-fall" style="left: 85%; animation-duration: 6.2s; animation-delay: 1.1s;"></div>
+  </div>
+
+<script>
+  const sobre = document.getElementById('sobre');
+
+  function abrirSobre() {
+    window.location.href = 'index2.html';
+  }
+
+  sobre.addEventListener('click', abrirSobre);
+  sobre.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      abrirSobre();
+    }
+  });
+</script>
+</body>
+</html>
